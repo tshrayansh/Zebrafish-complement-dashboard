@@ -90,6 +90,65 @@
     <footer>
         <p>Developed for project presentation. For full code and data, visit the <a href="https://github.com/tshrayansh/Zebrafish-complement-dashboard" target="_blank">GitHub Repository</a>.</p>
     </footer>
+    <section id="heatmap">
+  <h2>🔥 Complement Gene Expression Heatmap</h2>
+  <p>
+    This heatmap shows the number of times complement system genes have been detected in different zebrafish tissues. Darker colors represent more frequent detections.
+  </p>
+  <div id="heatmapPlot" style="height: 600px;"></div>
+</section>
+
+<script>
+  // Gene names (Y-axis)
+  const genes = [
+    "c3a.1", "cfp", "c3a.2", "c3a.3", "c6.1", "cfd", "c9", "c3a.6",
+    "cfhl2", "c3a.5", "c3b.1", "c3a.4", "cfb", "cfh", "c3b.2"
+  ];
+
+  // Tissue names (X-axis)
+  const tissues = [
+    "brain", "caudal vein plexus", "eye", "fin", "gill", "liver",
+    "whole organism", "testis", "yolk syncytial layer", "pronephric duct",
+    "epidermis", "central nervous system", "spleen", "adipose tissue",
+    "pharyngeal arch", "pharyngeal arch 3-7 skeleton", "post-vent region",
+    "cleithrum", "chondrocranium", "periderm", "unspecified"
+  ];
+
+  // Heatmap matrix values: rows = genes, columns = tissues
+  const values = [
+    [3, 0, 0, 0, 1, 0, 4, 0, 7, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [3, 3, 1, 1, 1, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 0, 2, 0, 3, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 0, 0, 2, 1, 0, 0, 0, 0, 2, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0]
+  ];
+
+  Plotly.newPlot('heatmapPlot', [{
+    z: values,
+    x: tissues,
+    y: genes,
+    type: 'heatmap',
+    colorscale: 'Viridis',
+    hoverongaps: false,
+    showscale: true
+  }], {
+    title: '<b>Gene Presence Across Zebrafish Tissues</b>',
+    xaxis: { title: 'Tissue Type', tickangle: 45 },
+    yaxis: { title: 'Gene Symbol', automargin: true },
+    margin: { t: 60, l: 100, r: 20, b: 150 }
+  });
+</script>
+
 
     <script>
         // --- DATA IS NOW EMBEDDED DIRECTLY ---
