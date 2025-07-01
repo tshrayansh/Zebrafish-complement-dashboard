@@ -1,82 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zebrafish Complement System Dashboard</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; }
-    header { background: #004d40; color: #fff; padding: 1rem; text-align: center; }
-    .container { max-width: 1200px; margin: auto; padding: 1.5rem; }
-    section { background: #fff; margin: 1.5rem 0; padding: 1rem; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .plot-container { width: 100%; height: 600px; position: relative; }
-    .loader { border: 8px solid #f3f3f3; border-top: 8px solid #004d40; border-radius: 50%; width: 60px; height: 60px; animation: spin 1.5s linear infinite; margin: 100px auto; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #555; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zebrafish Complement Dashboard</title>
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #004d40; /* Dark teal */
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #00796b; /* Lighter teal */
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        section {
+            background: #ffffff;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #004d40;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .plot-container {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Zebrafish Complement System Dashboard</h1>
-</header>
+    <header>
+        <h1>Zebrafish Complement System Dashboard</h1>
+    </header>
 
-<div class="container">
-  <section>
-    <h2>📊 Interactive Volcano Plot</h2>
-    <p>Hover on points for gene details; zoom and pan freely.</p>
-    <div id="volcanoPlot" class="plot-container">
-      <div class="loader"></div>
+    <div class="container">
+        <section id="introduction">
+            <h2>🚀 Project Overview</h2>
+            <p>
+                This project performs a comprehensive analysis of the Zebrafish complement system using transcriptomics data. The goal is to identify differentially expressed genes (DEGs) and understand their roles in biological pathways. The primary visualization used here is a volcano plot, which helps in identifying genes that are both statistically significant and show a substantial magnitude of change.
+            </p>
+        </section>
+
+        <section id="visualization">
+            <h2>📊 Interactive Volcano Plot</h2>
+            <p>
+                This plot displays statistical significance (p-value) versus magnitude of change (fold change). Hover over any point to see details for that specific gene. You can also zoom and pan to explore dense areas of the plot.
+            </p>
+            <div id="volcanoPlot" class="plot-container"></div>
+        </section>
+        
+        <section id="findings">
+            <h2>💡 Key Findings</h2>
+            <p>
+                This section will be updated with a summary of the key findings from the analysis once all plots are integrated and reviewed.
+            </p>
+        </section>
     </div>
-  </section>
-</div>
 
-<footer>
-  <p>Code & data available on <a href="https://github.com/tshrayansh/Zebrafish-complement-dashboard" target="_blank">GitHub</a>.</p>
-</footer>
+    <footer>
+        <p>Developed for project presentation. For full code and data, visit the <a href="https://github.com/tshrayansh/Zebrafish-complement-dashboard" target="_blank">GitHub Repository</a>.</p>
+    </footer>
 
-<script>
-  // 🔁 DATA LOADING FIX
-  // Use a **relative path** to finalize CSV in the same folder
-  const dataUrl = 'final_df.csv';
+    <script>
+        // --- DATA IS NOW EMBEDDED DIRECTLY ---
+        // This avoids the cross-origin (CORS) error when opening the file locally.
+        const embeddedData = [
+            {"gene_name":"zgc:103432","baseMean":6.94191,"log2FoldChange":3.43317,"pvalue":0.0000034},
+            {"gene_name":"si:ch211-265h15.1","baseMean":1.87448,"log2FoldChange":2.71281,"pvalue":0.0000085},
+            {"gene_name":"c2","baseMean":18.993,"log2FoldChange":2.41113,"pvalue":0.000036},
+            {"gene_name":"LOC100537424","baseMean":12.7483,"log2FoldChange":-2.31063,"pvalue":0.000057},
+            {"gene_name":"cfb","baseMean":7.59735,"log2FoldChange":2.57018,"pvalue":0.00014},
+            {"gene_name":"c4-2","baseMean":1.12191,"log2FoldChange":1.99042,"pvalue":0.00102},
+            {"gene_name":"serping1","baseMean":25.3023,"log2FoldChange":-1.5034,"pvalue":0.00201},
+            {"gene_name":"LOC100148788","baseMean":1.3786,"log2FoldChange":1.69614,"pvalue":0.00367},
+            {"gene_name":"vsig20","baseMean":21.2183,"log2FoldChange":1.67389,"pvalue":0.00552},
+            {"gene_name":"c1ql2","baseMean":15.6548,"log2FoldChange":1.5947,"pvalue":0.0105},
+            {"gene_name":"LOC115426189","baseMean":1.20624,"log2FoldChange":1.70624,"pvalue":0.0125},
+            {"gene_name":"c7","baseMean":229.471,"log2FoldChange":1.36551,"pvalue":0.013},
+            {"gene_name":"c9","baseMean":62.4693,"log2FoldChange":1.41103,"pvalue":0.0211},
+            {"gene_name":"cfhl1","baseMean":10.893,"log2FoldChange":1.4442,"pvalue":0.0267},
+            {"gene_name":"c3a.1","baseMean":150.11,"log2FoldChange":1.19968,"pvalue":0.0401},
+            {"gene_name":"f13a1b","baseMean":49.0345,"log2FoldChange":-1.04231,"pvalue":0.0451},
+            {"gene_name":"c5ar1","baseMean":0.6558,"log2FoldChange":1.07727,"pvalue":0.0911},
+            {"gene_name":"cfhl4","baseMean":1.50293,"log2FoldChange":1.04122,"pvalue":0.106},
+            {"gene_name":"crp4","baseMean":2.48212,"log2FoldChange":1.0335,"pvalue":0.114},
+            {"gene_name":"cebpa","baseMean":33.153,"log2FoldChange":-0.903824,"pvalue":0.118},
+            {"gene_name":"cfhl3","baseMean":3.25016,"log2FoldChange":0.939227,"pvalue":0.141}
+        ];
 
-  function createVolcanoPlot(data) {
-    const up = { x: [], y: [], text: [], mode: 'markers', name: 'Up-regulated', marker: { color:'red', size:8 } };
-    const down = { x: [], y: [], text: [], mode: 'markers', name: 'Down-regulated', marker: { color:'blue', size:8 } };
-    const non = { x: [], y: [], text: [], mode: 'markers', name: 'Not Significant', marker: { color:'grey', size:6 } };
+        // Function to create the Volcano Plot
+        function createVolcanoPlot(data) {
+            let upRegulated = { x: [], y: [], text: [], mode: 'markers', name: 'Up-regulated', marker: { color: 'red', size: 8, opacity: 0.7 } };
+            let downRegulated = { x: [], y: [], text: [], mode: 'markers', name: 'Down-regulated', marker: { color: 'blue', size: 8, opacity: 0.7 } };
+            let nonSignificant = { x: [], y: [], text: [], mode: 'markers', name: 'Not Significant', marker: { color: 'grey', size: 6, opacity: 0.5 } };
+            
+            // Significance thresholds
+            const pValueThreshold = 0.05;
+            const log2FcThreshold = 1.0;
 
-    const pThresh = 0.05, fcThresh = 1;
-    data.forEach(d => {
-      const x = +d.log2FoldChange;
-      const y = -Math.log10(+d.pvalue || 1e-100);
-      const hover = `Gene: ${d.gene_name}<br>log2FC: ${x.toFixed(2)}<br>p‑value: ${parseFloat(d.pvalue).toExponential(2)}`;
-      if (d.pvalue < pThresh && x > fcThresh) { up.x.push(x); up.y.push(y); up.text.push(hover); }
-      else if (d.pvalue < pThresh && x < -fcThresh) { down.x.push(x); down.y.push(y); down.text.push(hover); }
-      else { non.x.push(x); non.y.push(y); non.text.push(hover); }
-    });
+            data.forEach(row => {
+                const log2FC = parseFloat(row.log2FoldChange);
+                const pval = parseFloat(row.pvalue);
 
-    Plotly.newPlot('volcanoPlot', [non, down, up], {
-      title: '<b>Volcano Plot</b>',
-      xaxis: { title: 'log₂ Fold Change' },
-      yaxis: { title: '-log₁₀ p-value' },
-      hovermode: 'closest'
-    });
-  }
+                if(isNaN(log2FC) || isNaN(pval)) return;
 
-  // Load local CSV via D3
-  Plotly.d3.csv(dataUrl, (err, rows) => {
-    const container = document.getElementById('volcanoPlot');
-    if (err) {
-      console.error('Error loading data:', err);
-      container.innerHTML = '<p style="color:red; text-align:center;">Failed to load data — check the console.</p>';
-      return;
-    }
-    container.querySelector('.loader').style.display = 'none';
-    rows.forEach(d => { d.log2FoldChange = +d.log2FoldChange; d.pvalue = +d.pvalue; });
-    createVolcanoPlot(rows);
-  });
-</script>
+                const logPValue = -Math.log10(pval);
+                const target = { x: log2FC, y: logPValue, text: `Gene: ${row.gene_name}<br>log2FC: ${log2FC.toFixed(2)}<br>p-value: ${pval.toExponential(2)}` };
+                
+                if (pval < pValueThreshold && log2FC > log2FcThreshold) {
+                    upRegulated.x.push(target.x);
+                    upRegulated.y.push(target.y);
+                    upRegulated.text.push(target.text);
+                } else if (pval < pValueThreshold && log2FC < -log2FcThreshold) {
+                    downRegulated.x.push(target.x);
+                    downRegulated.y.push(target.y);
+                    downRegulated.text.push(target.text);
+                } else {
+                    nonSignificant.x.push(target.x);
+                    nonSignificant.y.push(target.y);
+                    nonSignificant.text.push(target.text);
+                }
+            });
+
+            const layout = {
+                title: '<b>Volcano Plot of Differentially Expressed Genes</b>',
+                xaxis: { title: 'log₂ Fold Change' },
+                yaxis: { title: '-log₁₀ p-value' },
+                hovermode: 'closest',
+                showlegend: true,
+                legend: { x: 1, xanchor: 'right', y: 1 }
+            };
+
+            Plotly.newPlot('volcanoPlot', [nonSignificant, downRegulated, upRegulated], layout);
+        }
+
+        // Immediately create the plot with the embedded data
+        createVolcanoPlot(embeddedData);
+
+    </script>
 
 </body>
 </html>
