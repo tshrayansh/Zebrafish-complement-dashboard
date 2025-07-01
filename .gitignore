@@ -1,0 +1,18 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Editor/IDE specific files
+.vscode/ # If you don't want to share VS Code settings (optional)
+.idea/   # IntelliJ/PyCharm (if applicable)
+*.swp    # Vim swap files
+
+# OS generated files
+.DS_Store # macOS specific
+Thumbs.db # Windows specific
+
